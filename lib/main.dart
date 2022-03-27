@@ -1,115 +1,122 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.green
+        ),
+        home: chatapp(),
+      )
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class chatapp extends StatefulWidget {
+  const chatapp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+  _chatappState createState() => _chatappState();
+
+}
+
+class _chatappState extends State<chatapp> {
+
+  final List<String> imageList = [
+    "https://wenr.wes.org/wp-content/uploads/2019/09/iStock-1142918319_WENR_Ranking_740_430.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOh2gJ9eXdaox-uRpAz3oqWtjDlJ3k0AukWgxlzXg07nH71OpRzx20BZG9JcxkxH3loZc&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnj7GvtqijGyb2focyFejrmqJk1g_Bcjl2qg&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV7vJmRomAsYtE3JazzOxK61x63rrsfilphA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0YpfIsnCgTkcz39Z_4-EzgbDsDqh9T0wPfA&usqp=CAU"
+
+  ];
+
+  Widget _BScard(int value){
+    String url="";
+    if(value==1){
+      url = "https://kinhte.donga.edu.vn/Portals/24/57611771_134292844397479_6609881241783107584_o.jpg";
+    }
+    return  Card(
+      child: Image.network(url,
+        fit: BoxFit.fill,
+        width: 150.0,
+        height: 150.0,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  Widget _BSCDetails(){
+    return SizedBox(
+        width: double.infinity,
+        height:140.0 ,
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text("BSCS (4 YEARS)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
+                SizedBox(
+                  width: 135.0,
+                  child: Divider(),
+                ),
+                Text("HỌC PHÍ: ỔN ĐỊNH TRONG CẢ KHÓA HỌC"),
+                SizedBox(
+                  width: 170.0,
+                  child: Divider(),
+                ),
+                Text("Riêng các ngành Kỹ thuật: Công nghệ thông tin, Trí tuệ nhân tạo và Khoa học dữ liệu, Công nghệ Kỹ thuật Ô tô là 570.000 đ/1 tín chỉ và ngành Dược: 835.000 đ/1 tín chỉ."),
+                SizedBox(
+                  width: 100.0,
+                  child: Divider(),
+                ),
+              ],
+            ),
+          ),
+        )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text("Slider"),
+        centerTitle: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: ListView(
+        padding: EdgeInsets.only(top: 40.0),
+        children: [
+          Center(
+            child: CarouselSlider(
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                enableInfiniteScroll: true,
+                autoPlay: true,
+              ),
+              items: imageList.map((e) => ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child:  Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(e,
+                      width: 1050.0,
+                      height: 350.0,
+                      fit: BoxFit.cover,
+                    )
+                  ],
+                ),
+              )).toList(),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          new Divider(height: 50.0,),
+          _BScard(1),
+          _BSCDetails(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
